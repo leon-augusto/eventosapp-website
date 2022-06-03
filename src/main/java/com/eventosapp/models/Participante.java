@@ -3,12 +3,15 @@ package com.eventosapp.models;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Participante {
 
     @Id
+    @NotEmpty
     private String matricula;
+    @NotEmpty
     private String nomeParticipante;
 
     @ManyToOne
