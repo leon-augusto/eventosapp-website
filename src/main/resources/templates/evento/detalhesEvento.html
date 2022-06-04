@@ -5,12 +5,23 @@
     <title>EventosApp</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
     <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="style/style.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-    <h1>Lista de Eventos</h1>
-    <h2><a href="/eventos" class="waves-effect waves-light btn"><i class="material-icons left">format_list_bulleted</i>Lista de Eventos</a></h2>
-    <div th:each="evento : ${evento}" class="container">
+    <header>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">Evento</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="/eventos" class="waves-effect waves-light btn"><i class="material-icons left">format_list_bulleted</i>Lista de Eventos</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div th:each="evento : ${evento}" class="container detalhesEvento">
+        <h1>Detalhes do Evento</h1>
         <div class="row">
             <p>Nome: <span th:text="${evento.nome}"></span></p>
             <p>Local: <span th:text="${evento.local}"></span></p>
@@ -19,24 +30,29 @@
         </div>
 
         <th:block th:include="mensagemValidacao"></th:block>
-
+    </div>
+    <div class="container formParticipante">
         <form method="post" th:object="${participante}">
             Nome: <input type="text" value="" name="nomeParticipante" placeholder="Nome Completo"/>
             Matrícula: <input type="text" value="" name="matricula" placeholder="0000 000 0000" class="validate"/>
             <button class="waves-effect waves-light btn" type="submit">Adicionar</button>
         </form>
     </div>
-    <h3>Lista de Participantes:</h3>
-    <div class="container" th:each="participante: ${participantes}">
-        <div class="row">
-            <div class="input-field col s6">
-                <p><span th:text="${participante.nomeParticipante}"></span></p>
-            </div>
-            <div class="input-field col s3">
-                <p><span th:text="${participante.matricula}"></span></p>
-            </div>
-        </div>
-    </div>
+
+    <table class="container tabelaParticipantes">
+        <thead>
+            <tr>
+                <th>Nome Participante</th>
+                <th>Matrícula</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="participante: ${participantes}">
+                <td><span th:text="${participante.nomeParticipante}"></span></td>
+                <td><span th:text="${participante.matricula}"></span></td>
+            </tr>
+        </tbody>
+    </table>
 
     <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
 </body>
