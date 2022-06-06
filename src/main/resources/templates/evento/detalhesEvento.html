@@ -44,12 +44,14 @@
             <tr>
                 <th>Nome Participante</th>
                 <th>Matrícula</th>
+                <th>Deletar</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="participante: ${participantes}">
                 <td><span th:text="${participante.nomeParticipante}"></span></td>
                 <td><span th:text="${participante.matricula}"></span></td>
+                <td><a th:href="${(#mvc.url('EC#deletarParticipante').arg(0, participante.matricula)).build()}"><i class="material-icons left">delete</i></a></td>
             </tr>
         </tbody>
     </table>
